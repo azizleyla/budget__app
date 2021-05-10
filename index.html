@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budget App</title>
+    <script src="https://kit.fontawesome.com/b04fed802b.js"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header class="header">
+        <h1>Budget Managment System</h1>
+    </header>
+    <section class="expense">
+        <div class="add-expense">
+            <div class="heading">
+                <h2>Add Expense</h2>
+            </div>
+            <form id="form" action="">
+                <div class="input-group">
+                    <label>Budget Title</label>
+                    <input type="text" placeholder="Enter Budget Title" id="budget">
+                </div>
+                <div class="input-group">
+                    <label>Amount</label>
+                    <input type="text" placeholder="Enter Amount" id="amount">
+                    <input type="hidden" placeholder="Enter Amount" id="id" />
+                </div>
+                <button type="submit" class="submit-btn">Save</button>
+            </form>
+        </div>
+        <div class="total-expense">
+            <div class="heading">
+                <h2 class="total">Total Expenses : </h2>
+            </div>
+            <div class="heading flex">
+                <h1>Expenses List</h1>
+                <button type="button" class="clear">Clear All</button>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Budget Name</th>
+                        <th>Budget Amount</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="tbody">
+
+                </tbody>
+
+            </table>
+        </div>
+    </section>
+
+
+    <script src="app.js"></script>
+</body>
+
+</html>
