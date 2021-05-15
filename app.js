@@ -37,6 +37,7 @@ function addExpense() {
         amount: Number(amount.value)
     }
     expenses.push(budgetObj);
+    setItemtoLS(expenses)
 }
 function saveExpense(e) {
     e.preventDefault();
@@ -51,7 +52,7 @@ function saveExpense(e) {
     renderExpense(expenses);
     totalExpense()
     displayMessage('Record has been saved!', 'blue');
-    setItemtoLS()
+    // setItemtoLS()
     setBackDefault()
 }
 //Clear Inputs
@@ -71,14 +72,12 @@ function displayMessage(message, className) {
     setTimeout(() => {
         div.remove();
     }, 1000)
-    console.log(div)
+
 }
 
-//deleteExpense
 
-//edit Expense
 
-//find totalExpense
+//calculate total expense
 function totalExpense() {
     let sum = expenses.reduce((acc, val) => {
         return acc + +val.amount
@@ -88,37 +87,31 @@ function totalExpense() {
 //clear All expense
 const clear = document.querySelector('.clear');
 clear.addEventListener('click', function () {
-    expenses.splice(0, expenses.length)
+    expenses = [];
     renderExpense(expenses);
     totalExpense();
     localStorage.clear();
+    editFlag = false;
 })
 
-//get expenes from lS
-function getItemfromLS() {
-    return localStorage.getItem('expenses') ? JSON.parse(localStorage.getItem('expenses', expenses)) : [];
-}
-//set expenses to LS
-function setItemtoLS() {
-    localStorage.setItem('expenses', JSON.stringify(expenses));
-}
-//load expenses from LS
-window.addEventListener('load', function () {
-    expenses = getItemfromLS();
-    renderExpense(expenses);
-})
+
 
 function deleteOne(id) {
+    //dele expense for LS
+    expenses = getItemfromLS();
     expenses = expenses.filter(expense => expense.id !== Number(id));
     renderExpense(expenses)
     totalExpense()
     displayMessage('Record has been deleted', 'red')
+    setItemtoLS(expenses)
+    editFlag = false;
 }
 function updateOne() {
     const id = hiddenInputForId.value;
     let editElment = expenses.find(expense => expense.id === Number(id));
     editElment.name = budget.value;
     editElment.amount = amount.value;
+    setItemtoLS(expenses)
 
 }
 function takeDataToInputs(id) {
@@ -140,9 +133,19 @@ tbody.addEventListener('click', function (e) {
 })
 
 
-
-
-
+//get expenes from lS
+function getItemfromLS() {
+    return localStorage.getItem('expenses') ? JSON.parse(localStorage.getItem('expenses', expenses)) : [];
+}
+//set expenses to LS
+function setItemtoLS(expenses) {
+    localStorage.setItem('expenses', JSON.stringify(expenses));
+}
+//load expenses from LS
+window.addEventListener('load', function () {
+    expenses = getItemfromLS();
+    renderExpense(expenses);
+})
 
 
 
